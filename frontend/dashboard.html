@@ -7,9 +7,12 @@
 </head>
 <body>
   <div class="app-layout">
+
+    <!-- Sidebar -->
     <div class="sidebar">
       <!-- Logo NousBe -->
       <img src="assets/logo.svg" alt="NousBe" width="160">
+
       <a href="#" onclick="showContent('dashboard')">📊 Dashboard</a>
       <a href="#" onclick="showContent('clientes')">👩 Clientes</a>
       <a href="#" onclick="showContent('agenda')">📅 Agenda</a>
@@ -19,7 +22,10 @@
       <a href="index.html">🚪 Sair</a>
     </div>
 
+    <!-- Conteúdo Principal -->
     <div class="main-content" id="mainContent">
+
+      <!-- Header -->
       <div class="header">
         <h2>📊 Dashboard</h2>
         <div class="bea-avatar">
@@ -28,22 +34,37 @@
         </div>
       </div>
 
+      <!-- Cards -->
       <div class="cards">
         <div class="card-small card-blue">
-          <h3>Clientes</h3><p>152</p>
+          <h3>Clientes</h3>
+          <p>152</p>
         </div>
         <div class="card-small card-purple">
-          <h3>Atendimentos</h3><p>27</p>
+          <h3>Atendimentos</h3>
+          <p>27</p>
         </div>
         <div class="card-small card-green">
-          <h3>Faturamento</h3><p>R$ 4.250</p>
+          <h3>Faturamento</h3>
+          <p>R$ 4.250</p>
         </div>
       </div>
 
+      <!-- Próximos Agendamentos -->
       <h3>Próximos Agendamentos</h3>
       <!-- Conteúdo dinâmico carregado pelo JS -->
-    </div>
-  </div>
+
+      <!-- Campanhas Demo -->
+      <h3 style="margin-top:2rem;">📢 Campanhas Automáticas</h3>
+      <button class="btn" onclick="enviarCampanha()">Enviar Lembrete</button>
+
+      <div id="campanhaLog" style="margin-top:20px; background:#fff; padding:1rem; border-radius:8px;">
+        <h4>Mensagens Enviadas</h4>
+        <ul id="mensagensEnviadas"></ul>
+      </div>
+
+    </div> <!-- /main-content -->
+  </div> <!-- /app-layout -->
 
   <!-- Botão flutuante Bea -->
   <button class="bea-button" onclick="toggleChat()">
@@ -56,9 +77,11 @@
       <img src="assets/bea-icon.svg" alt="Bea" width="28">
       <span>Bea - Assistente</span>
     </div>
+
     <div class="chat-messages" id="chatMessages">
       <div class="message bot">Olá, sou a Bea 🤖. Como posso te ajudar hoje?</div>
     </div>
+
     <div class="chat-input">
       <input type="text" id="userMessage" placeholder="Digite sua mensagem...">
       <button onclick="sendMessage()">➤</button>
