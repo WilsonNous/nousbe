@@ -11,11 +11,17 @@ function login() {
 function showContent(section) {
   const content = {
     dashboard: `
-      <h2>📊 Dashboard</h2>
+      <div class="header">
+        <h2>📊 Dashboard</h2>
+        <div class="bea-avatar">
+          <img src="https://i.pravatar.cc/100?img=5" alt="Bea">
+          <span>Bea está online 💬</span>
+        </div>
+      </div>
       <div class="cards">
-        <div class="card-small"><h3>Clientes</h3><p>152 cadastrados</p></div>
-        <div class="card-small"><h3>Atendimentos</h3><p>27 esta semana</p></div>
-        <div class="card-small"><h3>Faturamento</h3><p>R$ 4.250,00</p></div>
+        <div class="card-small card-blue"><h3>Clientes</h3><p>152</p></div>
+        <div class="card-small card-purple"><h3>Atendimentos</h3><p>27</p></div>
+        <div class="card-small card-green"><h3>Faturamento</h3><p>R$ 4.250</p></div>
       </div>
     `,
     clientes: `
@@ -66,3 +72,68 @@ function showContent(section) {
   };
   document.getElementById("mainContent").innerHTML = content[section];
 }
+
+/* ===================== BOT BEA ===================== */
+function toggleChat() {
+  const chat = document.getElementById("chatBox");
+  chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+}
+
+// Enviar mensagem
+function sendMessage() {
+  const input = document.getElementById("userMessage");
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const messages = document.getElementById("chatMessages");
+
+  // Usuário
+  const userMsg = document.createElement("div");
+  userMsg.className = "message user";
+  userMsg.textContent = msg;
+  messages.appendChild(userMsg);
+  saveMessage("user", msg);
+
+  // Resposta da Bea
+  setTimeout(() => {
+    const botMsg = document.createElement("div");
+    botMsg.className = "message bot";
+
+    if (msg.toLowerCase().includes("horário")) {
+      botMsg.textContent = "Temos horários amanhã às 10h, 14h e 16h ⏰";
+    } else if (msg.toLowerCase().includes("preço")) {
+      botMsg.textContent = "O corte custa R$80 e a coloração R$120 💇‍♀️";
+    } else if (msg.toLowerCase().includes("promo")) {
+      botMsg.textContent = "Estamos com 20% de desconto na coloração neste mês 🎉";
+    } else {
+      botMsg.textContent = "Entendi! Em breve alguém da equipe vai falar com você 😉";
+    }
+
+    messages.appendChild(botMsg);
+    saveMessage("bot", botMsg.textContent);
+    messages.scrollTop = messages.scrollHeight;
+  }, 800);
+
+  input.value = "";
+}
+
+// Salvar histórico
+function saveMessage(sender, text) {
+  let history = JSON.parse(localStorage.getItem("beaChat")) || [];
+  history.push({ sender, text });
+  localStorage.setItem("beaChat", JSON.stringify(history));
+}
+
+// Restaurar histórico
+window.onload = function() {
+  const messages = document.getElementById("chatMessages");
+  if (messages) {
+    let history = JSON.parse(localStorage.getItem("beaChat")) || [];
+    history.forEach(msg => {
+      const div = document.createElement("div");
+      div.className = "message " + msg.sender;
+      div.textContent = msg.text;
+      messages.appendChild(div);
+    });
+  }
+};
