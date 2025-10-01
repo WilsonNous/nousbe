@@ -1,1 +1,9 @@
-
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="60" viewBox="0 0 220 60">
+  <!-- Texto Nous -->
+  <text x="10" y="40" font-family="Poppins, sans-serif" font-size="32" font-weight="600" fill="#1877F2">Nous</text>
+  <!-- Texto Be -->
+  <text x="100" y="40" font-family="Poppins, sans-serif" font-size="32" font-weight="600" fill="#8B5CF6">Be</text>
+  <!-- Bolha Bea -->
+  <circle cx="190" cy="30" r="20" fill="#1877F2"></circle>
+  <text x="180" y="38" font-family="Poppins, sans-serif" font-size="20" font-weight="600" fill="white">💬</text>
+</svg>
