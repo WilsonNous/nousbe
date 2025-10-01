@@ -136,4 +136,32 @@ window.onload = function() {
       messages.appendChild(div);
     });
   }
+}
+
+/* ===================== CAMPANHAS DEMO ===================== */
+function enviarCampanha() {
+  const clientes = ["Ana Souza", "Maria Silva", "João Costa"];
+  const mensagens = document.getElementById("mensagensEnviadas");
+
+  mensagens.innerHTML = ""; // limpa antes
+
+  clientes.forEach((cliente, i) => {
+    const li = document.createElement("li");
+    li.textContent = `Enviando mensagem para ${cliente}...`;
+    mensagens.appendChild(li);
+
+    setTimeout(() => {
+      li.textContent = `✅ Mensagem enviada para ${cliente}: "Olá ${cliente}, sentimos sua falta! Volte a nos visitar 💇‍♀️"`;
+    }, 1000 * (i + 1));
+  });
+
+  // Bea avisa no chat
+  const chat = document.getElementById("chatMessages");
+  if (chat) {
+    const botMsg = document.createElement("div");
+    botMsg.className = "message bot";
+    botMsg.textContent = "Acabei de disparar 3 lembretes automáticos para clientes inativos 📢";
+    chat.appendChild(botMsg);
+    chat.scrollTop = chat.scrollHeight;
+  }
 };
